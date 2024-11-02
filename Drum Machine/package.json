@@ -2,7 +2,7 @@
   "name": "drum-machine",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://NickoCAMS.github.io/drum-machine/",
+  "homepage": "https://NickoCAMS.github.io/Drum-Machine/",
   "type": "module",
   "scripts": {
     "dev": "vite",
