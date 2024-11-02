@@ -2,7 +2,6 @@ import './App.scss';
 import { useState, useEffect, useRef } from 'react';
 
 const baseUrl = 'https://cdn.freecodecamp.org/testable-projects-fcc/audio/';
-
 const audioClips = [
   { key: 'Q', sound: 'Heater-1', displayName: 'Heater 1' },
   { key: 'W', sound: 'Heater-2', displayName: 'Heater 2' },
@@ -17,27 +16,24 @@ const audioClips = [
 
 function DrumPad() {
   const [display, setDisplay] = useState('');
-  const padRefs = useRef({}); // Ref to hold references to the buttons
+  const padRefs = useRef({});
 
-  const playSound = (clip) => {
+  const playSound = clip => {
     const audio = document.getElementById(clip.key);
-    audio.currentTime = 0; // Reset to start each time
+    audio.currentTime = 0;
     audio.play();
     setDisplay(clip.displayName);
 
-    // Focus the button element using refs
     const button = padRefs.current[clip.displayName];
     button.focus();
-    
-    // Remove focus after a short delay
+
     setTimeout(() => {
-      button.blur(); // Defocus the button
-    }, 100); // Adjust the delay as needed
+      button.blur();
+    }, 100);
   };
 
-  // Add event listener for keydown events
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = event => {
       const clip = audioClips.find(c => c.key === event.key.toUpperCase());
       if (clip) playSound(clip);
     };
@@ -49,13 +45,13 @@ function DrumPad() {
   return (
     <div id="drum-machine">
       <div className="pad-container">
-        {audioClips.map((clip) => (
+        {audioClips.map(clip => (
           <button
             key={clip.key}
             id={clip.displayName}
             onClick={() => playSound(clip)}
             className="drum-pad"
-            ref={el => padRefs.current[clip.displayName] = el} // Save ref to button
+            ref={el => padRefs.current[clip.displayName] = el}
           >
             {clip.key}
             <audio
@@ -72,3 +68,4 @@ function DrumPad() {
 }
 
 export default DrumPad;
+
